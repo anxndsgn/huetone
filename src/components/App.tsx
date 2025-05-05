@@ -134,7 +134,8 @@ const ControlRow = styled.main`
 const PaletteSection = styled.section`
   width: min-content;
   overflow: auto;
-  min-width: 400px;
+  min-width: 42rem;
+  border-right: 1px solid var(--c-divider);
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -146,7 +147,7 @@ const Charts = styled.section`
   grid-template-columns: ${chartWidth}px 8px ${chartWidth}px;
 `
 const ChartsSection = styled.section`
-  --c-bg: var(--c-bg-card);
+  --c-bg: white;
   overflow: auto;
   display: flex;
   gap: 16px;
