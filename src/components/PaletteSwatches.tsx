@@ -7,7 +7,6 @@ import {
   deltaEContrast,
 } from 'shared/color'
 import {
-  addHue,
   addTone,
   removeHue,
   removeTone,
@@ -20,6 +19,7 @@ import { useStore } from '@nanostores/react'
 import { colorSpaceStore, paletteStore, setPalette } from 'store/palette'
 import { selectedStore, setSelected } from 'store/currentPosition'
 import { overlayStore, versusColorStore } from 'store/overlay'
+import { AddRowButton } from './AddRowButton'
 
 const contrast = {
   WCAG: wcagContrast,
@@ -104,9 +104,7 @@ export const PaletteSwatches: FC = () => {
       ))}
 
       {/* COLUMN BUTTONS */}
-      <SmallButton title="Add row" onClick={() => setPalette(addHue(palette))}>
-        +
-      </SmallButton>
+      <AddRowButton />
       {tones.map((toneName, toneId) => (
         <SmallButton
           key={toneId}
@@ -132,9 +130,9 @@ const ToneInput = styled(InvisibleInput)`
 
 const Swatch = styled.button`
   cursor: pointer;
+  border: none;
   display: flex;
   position: relative;
-  border: none;
   align-items: center;
   justify-content: center;
   will-change: transform;
