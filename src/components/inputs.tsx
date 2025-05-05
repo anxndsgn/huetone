@@ -35,10 +35,37 @@ export const Button = styled.button`
   }
 `
 
-export const Select = styled(Button.withComponent('select'))`
+export const Select = styled.select`
+  cursor: pointer;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  color: var(--c-text-secondary);
+  border-radius: var(--radius-m);
+  background-color: var(--c-btn-bg);
+  font-size: 14px;
+  line-height: 20px;
+  padding: 6px 8px;
+  transition: 100ms ease-out;
+
+  :hover {
+    color: var(--c-text-primary);
+    background-color: var(--c-btn-bg-hover);
+  }
+
   :active {
-    /* Transform closes select on Firefox (or not) */
-    transform: none;
+    background-color: var(--c-btn-bg-active);
+    transition: 100ms ease-out;
+  }
+
+  :focus {
+    outline: 1px solid var(--c-text-primary);
+    outline-offset: 3px;
+  }
+  :focus:not(:focus-visible) {
+    outline: none;
   }
 `
 
@@ -76,7 +103,22 @@ export const Input = styled.input`
   }
 `
 
-export const TextArea = Input.withComponent('textarea')
+export const TextArea = styled.textarea`
+  border: 1px solid transparent;
+  border-radius: var(--radius-m);
+  color: var(--c-text-primary);
+  background: var(--c-btn-bg);
+  padding: 5px 8px;
+  font-size: 14px;
+  line-height: 20px;
+  transition: 100ms;
+
+  :focus {
+    outline: none;
+    border-color: var(--c-text-primary);
+    color: var(--c-text-primary);
+  }
+`
 
 export const ControlGroup = styled.div`
   display: flex;

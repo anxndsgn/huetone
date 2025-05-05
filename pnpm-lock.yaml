@@ -53,6 +53,21 @@ importers:
       web-vitals:
         specifier: ^3.5.2
         version: 3.5.2
+      workbox-core:
+        specifier: ^7.3.0
+        version: 7.3.0
+      workbox-expiration:
+        specifier: ^7.3.0
+        version: 7.3.0
+      workbox-precaching:
+        specifier: ^7.3.0
+        version: 7.3.0
+      workbox-routing:
+        specifier: ^7.3.0
+        version: 7.3.0
+      workbox-strategies:
+        specifier: ^7.3.0
+        version: 7.3.0
     devDependencies:
       '@testing-library/react':
         specifier: ^14.2.1
@@ -1395,6 +1410,9 @@ packages:
     resolution: {integrity: sha512-AXcZb6vzzrFAUE61HnN4mpLqd/cSIwNQjtNWR0euPm6y0iqx3G4gOXaIDdtdDwZmhwe82LA6+zinmW4UBWVePQ==}
     engines: {node: '>=16.17.0'}
 
+  idb@7.1.1:
+    resolution: {integrity: sha512-gchesWBzyvGHRO9W8tzUWFDycow5gwjvFKfyV9FF32Y7F50yZMp7mP+T2mJIWFx49zicqyC4uefHM17o6xKIVQ==}
+
   ieee754@1.2.1:
     resolution: {integrity: sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==}
 
@@ -2157,6 +2175,21 @@ packages:
     resolution: {integrity: sha512-hUrmaWBdVDcxvYqnyh09zunKzROWjbZTiNy8dBEjkS7ehEDQibXJ7XvlmtbwuTclUiIyN+CyXQD4Vmko8fNm8w==}
     engines: {node: '>=8'}
     hasBin: true
+
+  workbox-core@7.3.0:
+    resolution: {integrity: sha512-Z+mYrErfh4t3zi7NVTvOuACB0A/jA3bgxUN3PwtAVHvfEsZxV9Iju580VEETug3zYJRc0Dmii/aixI/Uxj8fmw==}
+
+  workbox-expiration@7.3.0:
+    resolution: {integrity: sha512-lpnSSLp2BM+K6bgFCWc5bS1LR5pAwDWbcKt1iL87/eTSJRdLdAwGQznZE+1czLgn/X05YChsrEegTNxjM067vQ==}
+
+  workbox-precaching@7.3.0:
+    resolution: {integrity: sha512-ckp/3t0msgXclVAYaNndAGeAoWQUv7Rwc4fdhWL69CCAb2UHo3Cef0KIUctqfQj1p8h6aGyz3w8Cy3Ihq9OmIw==}
+
+  workbox-routing@7.3.0:
+    resolution: {integrity: sha512-ZUlysUVn5ZUzMOmQN3bqu+gK98vNfgX/gSTZ127izJg/pMMy4LryAthnYtjuqcjkN4HEAx1mdgxNiKJMZQM76A==}
+
+  workbox-strategies@7.3.0:
+    resolution: {integrity: sha512-tmZydug+qzDFATwX7QiEL5Hdf7FrkhjaF9db1CbB39sDmEZJg3l9ayDvPxy8Y18C3Y66Nrr9kkN1f/RlkDgllg==}
 
   write-file-atomic@5.0.1:
     resolution: {integrity: sha512-+QU2zd6OTD8XWIJCbffaiQeH9U73qIqafo1x6V1snCWYGJf6cVE0cDR4D8xRzcEnfI21IFrUPzPGtcPf8AC+Rw==}
@@ -3377,6 +3410,8 @@ snapshots:
 
   human-signals@5.0.0: {}
 
+  idb@7.1.1: {}
+
   ieee754@1.2.1: {}
 
   ignore@5.3.2: {}
@@ -4161,6 +4196,27 @@ snapshots:
     dependencies:
       siginfo: 2.0.0
       stackback: 0.0.2
+
+  workbox-core@7.3.0: {}
+
+  workbox-expiration@7.3.0:
+    dependencies:
+      idb: 7.1.1
+      workbox-core: 7.3.0
+
+  workbox-precaching@7.3.0:
+    dependencies:
+      workbox-core: 7.3.0
+      workbox-routing: 7.3.0
+      workbox-strategies: 7.3.0
+
+  workbox-routing@7.3.0:
+    dependencies:
+      workbox-core: 7.3.0
+
+  workbox-strategies@7.3.0:
+    dependencies:
+      workbox-core: 7.3.0
 
   write-file-atomic@5.0.1:
     dependencies:
