@@ -1,7 +1,13 @@
 import { useStore } from '@nanostores/react'
 import React from 'react'
 import styled from 'styled-components'
-import { getPaletteLink, setColor, setPalette } from 'store/palette'
+import {
+  getPaletteLink,
+  setColor,
+  setPalette,
+  duplicatePalette,
+  paletteListStore,
+} from 'store/palette'
 import { Button, ControlGroup } from '../inputs'
 import { ThemeButton } from './ThemeButton'
 import { PaletteSelect } from './PaletteSelect'
@@ -19,6 +25,11 @@ import { ColorEditor } from './ColorEditor'
 import { ColorActions } from './ColorActions'
 import { selectedStore } from 'store/currentPosition'
 import { ChartSettings } from './ChartSettings'
+import { Import } from '../Import'
+import {
+  importFromDesignToken,
+  importFromCSSVariables,
+} from 'store/palette/importers'
 
 const modes: TOverlayMode[] = ['APCA', 'WCAG', 'NONE', 'DELTA_E']
 
@@ -33,11 +44,33 @@ export function Header() {
   const palette = useStore(paletteStore)
   const overlay = useStore(overlayStore)
   const selected = useStore(selectedStore)
+  const paletteList = useStore(paletteListStore)
+
+  const handleImport = (
+    type: 'design-token' | 'css-variables',
+    content: string
+  ) => {
+    try {
+      const importedPalette =
+        type === 'design-token'
+          ? importFromDesignToken(content)
+          : importFromCSSVariables(content)
+
+      // 创建新的调色板
+      const currentPaletteIndex = paletteList.length - 1
+      duplicatePalette(currentPaletteIndex)
+      setPalette(importedPalette)
+    } catch (error) {
+      console.error('导入失败:', error)
+      alert(error instanceof Error ? error.message : '导入失败')
+    }
+  }
 
   return (
     <Wrapper>
       <ControlRow>
         <PaletteSelect />
+        <Import onImport={handleImport} />
         <CopyButton getContent={() => getPaletteLink(palette)}>
           <Link />
           Copy link
