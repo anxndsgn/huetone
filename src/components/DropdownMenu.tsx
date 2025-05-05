@@ -23,9 +23,8 @@ export const Item = styled(Menu.Item)<{ selected?: boolean }>`
   color: var(--c-text-primary);
   font-size: 14px;
   line-height: 20px;
-  padding: 6px 6px;
+  padding: 12px 12px;
   transition: 100ms ease-out;
-  border-radius: var(--radius-m);
   background-color: ${p => (p.selected ? 'var(--c-btn-bg)' : 'transparent')};
 
   :hover,
@@ -44,7 +43,6 @@ export const Item = styled(Menu.Item)<{ selected?: boolean }>`
 export const Content = styled(Menu.Content)`
   --c-bg: var(--c-bg-card);
   z-index: 1000;
-  padding: 8px 2px;
   border-radius: var(--radius-m);
   background-color: var(--c-bg);
   filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.2));

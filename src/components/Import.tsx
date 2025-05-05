@@ -24,7 +24,7 @@ export function Import({ onImport }: ImportProps) {
     <Container>
       <DropdownMenu.Root open={isOpen} onOpenChange={setIsOpen}>
         <DropdownMenu.Trigger asChild>
-          <ImportButton>新建色板</ImportButton>
+          <ImportButton>Import</ImportButton>
         </DropdownMenu.Trigger>
         <DropdownMenu.Portal>
           <DropdownMenu.Content>
@@ -37,7 +37,7 @@ export function Import({ onImport }: ImportProps) {
                 input.click()
               }}
             >
-              从 Design Token 新建
+              Import from Design Token
             </DropdownMenu.Item>
             <DropdownMenu.Item
               onClick={() => {
@@ -48,7 +48,7 @@ export function Import({ onImport }: ImportProps) {
                 input.click()
               }}
             >
-              从 CSS Variables 新建
+              Import from CSS Variables
             </DropdownMenu.Item>
           </DropdownMenu.Content>
         </DropdownMenu.Portal>
