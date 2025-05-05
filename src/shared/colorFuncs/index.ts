@@ -1,4 +1,5 @@
 import chroma from 'chroma-js'
+import { formatHex, parse, oklch as oklchConverter } from 'culori'
 import { LCH, RGB, spaceName, TColor, XYZ } from '../types'
 import { clamp } from '../utils'
 import { oklch, cielch } from './colorModels'
@@ -34,6 +35,7 @@ export type TColorSpace = {
   ranges: TLchModel['ranges']
   hex2color: (hex: string) => TColor | null
   lch2color: (lch: LCH) => TColor
+  anyToColor: (color: string) => TColor | null
 }
 
 /** Makes color space object with essential functions */
@@ -91,5 +93,26 @@ function colorSpaceMaker(colorSpace: TLchModel): TColorSpace {
     }
   }
 
-  return { name, ranges, hex2color, lch2color }
+  function anyToColor(color: string): TColor | null {
+    const parsed = oklchConverter(color)
+    if (!parsed) return null
+
+    // 确保所有值都有合理的默认值
+    const l = parsed.l ?? 0
+    const c = parsed.c ?? 0
+    // 对于灰色（c=0），h 可以是任意值，因为不会影响最终颜色
+    const h = c === 0 ? 0 : parsed.h ?? 0
+
+    // 验证值的范围
+    if (l < 0 || l > 1) return null
+    if (c < 0) return null
+    if (h < 0 || h > 360) return null
+
+    // 将 l 值从 0-1 范围映射到 0-100 范围
+    const lch: LCH = [l * 100, c, h]
+
+    return lch2color(lch)
+  }
+
+  return { name, ranges, hex2color, lch2color, anyToColor }
 }

@@ -35,7 +35,7 @@ export function parseHexPalette(
   hexPalette: HexPalette,
   mode: spaceName
 ): Palette {
-  const { hex2color } = colorSpaces[mode]
+  const { anyToColor } = colorSpaces[mode]
   const hues = hexPalette.hues.filter(hue => hue?.colors?.length)
   const hueNames = hues.map(hue => hue.name || '???')
   const maxTones = hues
@@ -45,9 +45,12 @@ export function parseHexPalette(
     (v, idx) => hexPalette?.tones?.[idx] || (idx * 100).toString()
   )
   const colors = hues.map(hue =>
-    toneNames.map(
-      (v, idx) => hex2color(hue.colors[idx]) || (hex2color('#000') as TColor)
-    )
+    toneNames.map((v, idx) => {
+      const color = hue.colors[idx]
+      const tColor = anyToColor(color) || (anyToColor('#000') as TColor)
+
+      return tColor
+    })
   )
 
   return {
