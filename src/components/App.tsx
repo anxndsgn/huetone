@@ -147,7 +147,7 @@ const Charts = styled.section`
   grid-template-columns: ${chartWidth}px 8px ${chartWidth}px;
 `
 const ChartsSection = styled.section`
-  --c-bg: white;
+  --c-bg: var(--c-bg-primary);
   overflow: auto;
   display: flex;
   gap: 16px;
