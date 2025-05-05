@@ -84,8 +84,8 @@ export const PaletteSwatches: FC = () => {
                     ? color.hex
                     : colorSpace.lch2color([color.l, 0, 0]).hex,
                   color: getMostContrast(color.hex, ['#000', '#fff']),
-                  borderRadius: isSelected ? 'var(--radius-m)' : 0,
                   transform: isSelected ? 'scale(1.25)' : 'scale(1)',
+                  transition: 'transform 0.1s ease-in-out',
                   zIndex: isSelected ? 3 : 0,
                   fontWeight: isSelected ? 900 : 400,
                 }}
