@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react'
 import { useStore } from '@nanostores/react'
-import { valid } from 'chroma-js'
+import chroma from 'chroma-js'
 import styled from 'styled-components'
 import { selectedStore } from 'store/currentPosition'
 import { paletteStore } from 'store/palette'
@@ -35,7 +35,7 @@ const ContrastGroup: FC<{ versusColor: string }> = props => {
     const i = tones.indexOf(colorInput)
     if (i >= 0) {
       setAdditionalColor(colors[hueId][i].hex)
-    } else if (valid(colorInput)) {
+    } else if (chroma.valid(colorInput)) {
       setAdditionalColor(colorInput)
     }
   }, [colorInput, colors, hueId, tones])
