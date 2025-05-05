@@ -146,3 +146,64 @@ export function getPaletteLink(palette: Palette): string {
   url.searchParams.set('palette', compressed)
   return url.toString()
 }
+
+/** Convert local palette to Tailwind CSS v3 CSS variables format
+ *  @param palette
+ */
+export function exportToTailwindV3Vars(palette: Palette): string {
+  let { tones, hues, colors, name } = palette
+  let strings: string[] = [`/* ${name} Tailwind CSS v3 variables */`]
+  hues.forEach((hue, hueIdx) => {
+    strings.push('')
+    strings.push('/* ' + hue + ' */')
+    tones.forEach((tone, toneIdx) => {
+      const color = colors[hueIdx][toneIdx]
+      strings.push(
+        `--color-${hue}-${tone}: ${Math.round(color.r)} ${Math.round(
+          color.g
+        )} ${Math.round(color.b)};`
+      )
+    })
+  })
+  return strings.join('\n')
+}
+
+/** Convert local palette to Tailwind CSS v3 config format
+ *  @param palette
+ */
+export function exportToTailwindV3Config(palette: Palette): string {
+  let { tones, hues, colors, name } = palette
+  let strings: string[] = [`// ${name} Tailwind CSS v3 config`, 'colors: {']
+
+  hues.forEach((hue, hueIdx) => {
+    strings.push(`  ${hue}: {`)
+    tones.forEach((tone, toneIdx) => {
+      const color = colors[hueIdx][toneIdx]
+      strings.push(`    ${tone}: '${color.hex}',`)
+    })
+    strings.push('  },')
+  })
+  strings.push('},')
+  return strings.join('\n')
+}
+
+/** Convert local palette to Tailwind CSS v4 format
+ *  @param palette
+ */
+export function exportToTailwindV4(palette: Palette): string {
+  let { tones, hues, colors, name } = palette
+  let strings: string[] = [`/* ${name} Tailwind CSS v4 variables */`]
+  hues.forEach((hue, hueIdx) => {
+    strings.push('')
+    strings.push('/* ' + hue + ' */')
+    tones.forEach((tone, toneIdx) => {
+      const color = colors[hueIdx][toneIdx]
+      strings.push(
+        `--color-${hue}-${tone}: oklch(${color.l.toFixed(3)} ${color.c.toFixed(
+          3
+        )} ${color.h.toFixed(3)});`
+      )
+    })
+  })
+  return strings.join('\n')
+}

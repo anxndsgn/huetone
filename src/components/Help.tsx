@@ -1,6 +1,12 @@
 import { FC } from 'react'
 import styled from 'styled-components'
-import { CSSExportButton, TokenExportButton } from './Export'
+import {
+  CSSExportButton,
+  TokenExportButton,
+  TailwindV3VarsButton,
+  TailwindV3ConfigButton,
+  TailwindV4Button,
+} from './Export'
 
 export const Help: FC = () => (
   <Wrapper>
@@ -26,6 +32,15 @@ const Export: FC = () => (
     </p>
     <p>
       <CSSExportButton />
+    </p>
+    <p>
+      <TailwindV3VarsButton />
+    </p>
+    <p>
+      <TailwindV3ConfigButton />
+    </p>
+    <p>
+      <TailwindV4Button />
     </p>
   </Section>
 )
@@ -107,8 +122,8 @@ const Credits = () => (
       working group for providing all the essential code for color conversions.
     </p>
     <p>
-      Accessible Perceptual Contrast Algorithm (APCA) by Andrew Somers is a
-      WCAG 3 working draft and may change later. To learn more visit{' '}
+      Accessible Perceptual Contrast Algorithm (APCA) by Andrew Somers is a WCAG
+      3 working draft and may change later. To learn more visit{' '}
       <Link href="https://www.w3.org/WAI/GL/task-forces/silver/wiki/Visual_Contrast_of_Text_Subgroup">
         this page
       </Link>{' '}

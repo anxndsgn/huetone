@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState, useRef } from 'react'
+import React, { FC, useEffect, useState, useRef, ChangeEvent } from 'react'
 import styled from 'styled-components'
 import { useStore } from '@nanostores/react'
 import {
@@ -6,7 +6,12 @@ import {
   exportToTokens,
   parseHexPalette,
 } from 'store/palette'
-import { exportToCSS } from 'store/palette/converters'
+import {
+  exportToCSS,
+  exportToTailwindV3Vars,
+  exportToTailwindV3Config,
+  exportToTailwindV4,
+} from 'store/palette/converters'
 import { paletteStore, setPalette } from 'store/palette'
 import { TextArea } from './inputs'
 import { CopyButton } from './CopyButton'
@@ -34,9 +39,36 @@ export const CSSExportButton: FC = () => {
   )
 }
 
+export const TailwindV3VarsButton: FC = () => {
+  const palette = useStore(paletteStore)
+  return (
+    <CopyButton getContent={() => exportToTailwindV3Vars(palette)}>
+      Copy Tailwind v3 CSS vars
+    </CopyButton>
+  )
+}
+
+export const TailwindV3ConfigButton: FC = () => {
+  const palette = useStore(paletteStore)
+  return (
+    <CopyButton getContent={() => exportToTailwindV3Config(palette)}>
+      Copy Tailwind v3 config
+    </CopyButton>
+  )
+}
+
+export const TailwindV4Button: FC = () => {
+  const palette = useStore(paletteStore)
+  return (
+    <CopyButton getContent={() => exportToTailwindV4(palette)}>
+      Copy Tailwind v4 vars
+    </CopyButton>
+  )
+}
+
 export const ExportField: FC = () => {
   const palette = useStore(paletteStore)
-  const ref = useRef<any>()
+  const ref = useRef<HTMLTextAreaElement>(null)
   const [areaValue, setAreaValue] = useState('')
   const currentJSON = JSON.stringify(exportToHexPalette(palette), null, 2)
 
@@ -52,8 +84,8 @@ export const ExportField: FC = () => {
       ref={ref}
       onBlur={() => setAreaValue(currentJSON)}
       value={areaValue}
-      onFocus={e => e.target.select()}
-      onChange={e => {
+      onFocus={(e: ChangeEvent<HTMLTextAreaElement>) => e.target.select()}
+      onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
         const value = e.target.value
         setAreaValue(value)
         if (value) {
