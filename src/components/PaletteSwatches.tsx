@@ -142,7 +142,7 @@ const Swatch = styled.button`
   }
 `
 
-const SmallButton = styled(Button)`
+export const SmallButton = styled(Button)`
   background: transparent;
   padding: 0;
   opacity: 0;

@@ -6,6 +6,7 @@ import { colorSpaces } from 'shared/colorFuncs'
 import { addHue, setPalette } from 'store/palette'
 import { useStore } from '@nanostores/react'
 import { paletteStore } from 'store/palette'
+import { SmallButton } from './PaletteSwatches'
 
 export function AddRowButton() {
   const [isOpen, setIsOpen] = useState(false)
@@ -69,14 +70,14 @@ export function AddRowButton() {
   return (
     <DropdownMenu.Root open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenu.Trigger asChild>
-        <SmallButton title="添加行">+</SmallButton>
+        <SmallButton title="Add Hue">+</SmallButton>
       </DropdownMenu.Trigger>
       <DropdownMenu.Portal>
         <DropdownMenu.Content>
           <ColorInputContainer>
             <ColorInput
               type="text"
-              placeholder="输入颜色值 (例如: #ff0000)"
+              placeholder="#ff0000"
               value={colorInput}
               onChange={e => setColorInput(e.target.value)}
               onKeyDown={e => {
@@ -85,26 +86,16 @@ export function AddRowButton() {
                 }
               }}
             />
-            <Button onClick={handleAddFromColor}>从颜色新建</Button>
+            <Button onClick={handleAddFromColor}>Add Color</Button>
           </ColorInputContainer>
           <DropdownMenu.Item onClick={handleCopyLastRow}>
-            复制最后一行
+            Add New Row
           </DropdownMenu.Item>
         </DropdownMenu.Content>
       </DropdownMenu.Portal>
     </DropdownMenu.Root>
   )
 }
-
-const SmallButton = styled(Button)`
-  background: transparent;
-  padding: 0;
-  opacity: 0;
-
-  :hover {
-    opacity: 1;
-  }
-`
 
 const ColorInputContainer = styled.div`
   display: flex;
