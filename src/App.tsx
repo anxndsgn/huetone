@@ -13,7 +13,7 @@ import { paletteStore } from 'store/palette'
 import { selectedStore, setSelected } from 'store/currentPosition'
 import { Header } from './components/Header'
 
-const chartWidth = 400
+const chartWidth = 500
 
 export default function App() {
   const palette = useStore(paletteStore)
@@ -39,6 +39,13 @@ export default function App() {
 
         <ChartsSection>
           <Charts>
+            <h1
+              style={{
+                gridColumn: '1/-1',
+              }}
+            >
+              Lightness
+            </h1>
             <Scale
               width={chartWidth}
               selected={selected.toneId}
@@ -62,7 +69,13 @@ export default function App() {
                 setLchColor(lch, i, selected.toneId)
               }}
             />
-
+            <h1
+              style={{
+                gridColumn: '1/-1',
+              }}
+            >
+              Chroma
+            </h1>
             <Scale
               width={chartWidth}
               selected={selected.toneId}
@@ -86,7 +99,13 @@ export default function App() {
                 setLchColor(lch, i, selected.toneId)
               }}
             />
-
+            <h1
+              style={{
+                gridColumn: '1/-1',
+              }}
+            >
+              Hue
+            </h1>
             <Scale
               width={chartWidth}
               selected={selected.toneId}
