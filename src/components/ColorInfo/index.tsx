@@ -6,12 +6,15 @@ import { selectedStore } from 'store/currentPosition'
 import { paletteStore } from 'store/palette'
 import { Input } from '../inputs'
 import { ContrastBadgeAPCA, ContrastBadgeWCAG } from './ContrastBadge'
+import * as Menu from '../DropdownMenu'
+import { ChevronDown } from 'shared/icons/ChevronDown'
+import { Button } from '../inputs'
 
 export const ColorInfo: FC = () => {
   const { tones } = useStore(paletteStore)
   return (
     <ContrastStack>
-      <ContrastGroup versusColor={tones[0]} />
+      <ToneContrastGroup versusColor={tones[0]} />
       <ContrastGroup versusColor={'white'} />
       <ContrastGroup versusColor={'black'} />
     </ContrastStack>
@@ -23,6 +26,49 @@ const ContrastStack = styled.div`
   gap: 16px;
 `
 
+const ToneContrastGroup: FC<{ versusColor: string }> = props => {
+  const { color, hueId, toneId } = useStore(selectedStore)
+  const { colors, tones, hues } = useStore(paletteStore)
+  const hex = color.hex
+  const [selectedToneId, setSelectedToneId] = useState(0)
+  const additionalColor = colors[hueId][selectedToneId].hex
+  const name = hues[hueId] + '-' + tones[toneId]
+
+  return (
+    <Wrapper>
+      <Heading>
+        <h4> {name} vs. </h4>
+
+        <Menu.Root>
+          <Menu.Trigger asChild>
+            <Button style={{ width: 100, justifyContent: 'space-between' }}>
+              <span>
+                {hues[hueId]}-{tones[selectedToneId]}
+              </span>
+              <ChevronDown />
+            </Button>
+          </Menu.Trigger>
+          <Menu.Portal>
+            <Menu.Content align="start" sideOffset={4}>
+              {tones.map((tone, index) => (
+                <Menu.Item
+                  key={tone}
+                  selected={index === selectedToneId}
+                  onSelect={() => setSelectedToneId(index)}
+                >
+                  {hues[hueId]}-{tone}
+                </Menu.Item>
+              ))}
+            </Menu.Content>
+          </Menu.Portal>
+        </Menu.Root>
+      </Heading>
+      <ContrastBadgeAPCA background={additionalColor} color={hex} />
+      <ContrastBadgeAPCA background={hex} color={additionalColor} />
+      <ContrastBadgeWCAG background={additionalColor} color={hex} />
+    </Wrapper>
+  )
+}
 const ContrastGroup: FC<{ versusColor: string }> = props => {
   const { color, hueId, toneId } = useStore(selectedStore)
   const { colors, tones, hues } = useStore(paletteStore)
@@ -67,6 +113,12 @@ const Wrapper = styled.div`
 `
 const Heading = styled.div`
   padding-top: 8px;
+  width: 100%;
   grid-column: 1 / -1;
   text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 `
