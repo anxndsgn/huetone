@@ -16,7 +16,7 @@ import tailwind from './tailwind.json'
 import tailwindv4 from './tailwindv4.json'
 import arco_design from './arco_design.json'
 import tdesign from './tdesign.json'
-
+import tea_design from './tea_design.json'
 export const PRESETS: HexPalette[] = [
   example,
   semrush,
@@ -35,4 +35,5 @@ export const PRESETS: HexPalette[] = [
   antDesign,
   arco_design,
   tdesign,
+  tea_design,
 ]
