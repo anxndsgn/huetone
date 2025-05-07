@@ -17,6 +17,7 @@ import tailwindv4 from './tailwindv4.json'
 import arco_design from './arco_design.json'
 import tdesign from './tdesign.json'
 import tea_design_3 from './tea_design_3.json'
+import base from './base.json'
 
 export const PRESETS: HexPalette[] = [
   example,
@@ -25,6 +26,7 @@ export const PRESETS: HexPalette[] = [
   tea_design_3,
   stripe,
   stripe_dashboard,
+  base,
   // chakra_ui,
   radix_ui_dark,
   radix_ui_light,
