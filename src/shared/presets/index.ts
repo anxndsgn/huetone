@@ -16,24 +16,25 @@ import tailwind from './tailwind.json'
 import tailwindv4 from './tailwindv4.json'
 import arco_design from './arco_design.json'
 import tdesign from './tdesign.json'
-import tea_design from './tea_design.json'
+import tea_design_3 from './tea_design_3.json'
+
 export const PRESETS: HexPalette[] = [
   example,
-  semrush,
+  // semrush,
+  tdesign,
+  tea_design_3,
   stripe,
   stripe_dashboard,
-  chakra_ui,
+  // chakra_ui,
   radix_ui_dark,
   radix_ui_light,
   tailwind,
   tailwindv4,
   ibm,
-  uswds,
-  evergreen,
+  // uswds,
+  // evergreen,
   google,
   github,
   antDesign,
   arco_design,
-  tdesign,
-  tea_design,
 ]
