@@ -62,8 +62,21 @@ export function AddRowButton() {
     setIsOpen(false)
   }
 
-  const handleCopyLastRow = () => {
+  const handleAddNewRow = () => {
     setPalette(addHue(palette))
+    setIsOpen(false)
+  }
+
+  const handleCopyLastRow = () => {
+    const lastRowIndex = palette.colors.length - 1
+    if (lastRowIndex < 0) return
+
+    const lastRow = palette.colors[lastRowIndex]
+    setPalette({
+      ...palette,
+      hues: [...palette.hues, `Hue ${palette.hues.length + 1}`],
+      colors: [...palette.colors, [...lastRow]],
+    })
     setIsOpen(false)
   }
 
@@ -89,7 +102,10 @@ export function AddRowButton() {
             <Button onClick={handleAddFromColor}>Add Color</Button>
           </ColorInputContainer>
           <DropdownMenu.Item onClick={handleCopyLastRow}>
-            Add New Row
+            Copy Last Row
+          </DropdownMenu.Item>
+          <DropdownMenu.Item onClick={handleAddNewRow}>
+            Add New Gray Row
           </DropdownMenu.Item>
         </DropdownMenu.Content>
       </DropdownMenu.Portal>
