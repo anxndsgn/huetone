@@ -103,8 +103,11 @@ const Credits = () => (
   <Section>
     <h3>Credits</h3>
     <p>
-      Made by <Link href="https://ardov.me">Alexey Ardov</Link>. Contact me if
-      you have any suggestions.
+      This tool is modified by{' '}
+      <Link href="https://github.com/anxndsgn">XIN</Link> from{' '}
+      <Link href="https://ardov.me">Alexey Ardov</Link>'s{' '}
+      <Link href="https://huetone.ardov.me">Huetone</Link>. Big thanks to Alexey
+      for his great work!
     </p>
     <p>
       Huetone is heavily inspired by{' '}
