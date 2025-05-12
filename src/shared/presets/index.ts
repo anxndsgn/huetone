@@ -23,7 +23,7 @@ export const PRESETS: HexPalette[] = [
   example,
   // semrush,
   tdesign,
-  tea_design_3,
+  // tea_design_3,
   stripe,
   stripe_dashboard,
   base,
