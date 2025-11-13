@@ -194,15 +194,17 @@ export function exportToTailwindV3Config(palette: Palette): string {
  *  @param palette
  */
 export function exportToTailwindV4(palette: Palette): string {
-  let { tones, hues, colors, name } = palette
+  let { tones, hues, colors, name, mode } = palette
   let strings: string[] = [`/* ${name} Tailwind CSS v4 variables */`]
   hues.forEach((hue, hueIdx) => {
     strings.push('')
     strings.push('/* ' + hue + ' */')
     tones.forEach((tone, toneIdx) => {
       const color = colors[hueIdx][toneIdx]
+      // For OKLCH, lightness is stored as 0-100 but needs to be exported as 0-1
+      const l = mode === spaceName.oklch ? color.l / 100 : color.l
       strings.push(
-        `--color-${hue}-${tone}: oklch(${color.l.toFixed(3)} ${color.c.toFixed(
+        `--color-${hue}-${tone}: oklch(${l.toFixed(5)} ${color.c.toFixed(
           3
         )} ${color.h.toFixed(3)});`
       )
