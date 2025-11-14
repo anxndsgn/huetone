@@ -38,10 +38,22 @@ export const PaletteSwatches: FC = () => {
   const { hues, tones, colors } = palette
   const getCR = useCallback(
     (hex: string) => {
-      let cr = contrast[overlay.mode](versusColor, hex)
-      return cr && Math.floor(cr * 10) / 10
+      if (overlay.bwContrastMode === 'white') {
+        const cr = contrast[overlay.mode](hex, '#fff')
+        return cr && Math.floor(cr * 10) / 10
+      } else if (overlay.bwContrastMode === 'black') {
+        const cr = contrast[overlay.mode](hex, '#000')
+        return cr && Math.floor(cr * 10) / 10
+      } else {
+        // overlay.bwContrastMode === 'max'
+        const blackCR = contrast[overlay.mode](hex, '#000')
+        const whiteCR = contrast[overlay.mode](hex, '#fff')
+        if (!blackCR && !whiteCR) return undefined
+        const maxCR = Math.max(blackCR || 0, whiteCR || 0)
+        return Math.floor(maxCR * 10) / 10
+      }
     },
-    [overlay.mode, versusColor]
+    [overlay.mode, overlay.bwContrastMode]
   )
 
   return (

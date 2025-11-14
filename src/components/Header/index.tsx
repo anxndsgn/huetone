@@ -19,7 +19,9 @@ import {
   overlayStore,
   setOverlayMode,
   setVersusColor,
+  setBWContrastMode,
   TOverlayMode,
+  TBWContrastMode,
 } from 'store/overlay'
 import { ColorEditor } from './ColorEditor'
 import { ColorActions } from './ColorActions'
@@ -32,12 +34,19 @@ import {
 } from 'store/palette/importers'
 
 const modes: TOverlayMode[] = ['APCA', 'WCAG', 'NONE', 'DELTA_E']
+const bwContrastModes: TBWContrastMode[] = ['white', 'black', 'max']
 
 const texts = {
   APCA: 'APCA contrast',
   WCAG: 'WCAG contrast',
   NONE: 'Without overlay',
   DELTA_E: 'Delta E distance',
+}
+
+const bwContrastTexts: Record<TBWContrastMode, string> = {
+  white: 'vs. white',
+  black: 'vs. black',
+  max: 'max(B/W)',
 }
 
 export function Header() {
@@ -102,15 +111,26 @@ export function Header() {
             {texts[overlay.mode]}
           </Button>
           {overlay.mode !== 'NONE' && (
-            <Button
-              onClick={() =>
-                setVersusColor(
-                  overlay.versus === 'selected' ? 'white' : 'selected'
-                )
-              }
-            >
-              vs. {overlay.versus}
-            </Button>
+            <>
+              <Button
+                onClick={() =>
+                  setVersusColor(
+                    overlay.versus === 'selected' ? 'white' : 'selected'
+                  )
+                }
+              >
+                vs. {overlay.versus}
+              </Button>
+              <Button
+                onClick={() => {
+                  const idx = bwContrastModes.findIndex(mode => overlay.bwContrastMode === mode) + 1
+                  setBWContrastMode(bwContrastModes[idx % bwContrastModes.length])
+                }}
+                title={`切换对比度模式: ${bwContrastTexts[overlay.bwContrastMode]}`}
+              >
+                {bwContrastTexts[overlay.bwContrastMode]}
+              </Button>
+            </>
           )}
         </ControlGroup>
 
