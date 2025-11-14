@@ -201,10 +201,10 @@ export function exportToTailwindV4(palette: Palette): string {
     strings.push('/* ' + hue + ' */')
     tones.forEach((tone, toneIdx) => {
       const color = colors[hueIdx][toneIdx]
-      // For OKLCH, lightness is stored as 0-100 but needs to be exported as 0-1
-      const l = mode === spaceName.oklch ? color.l / 100 : color.l
+      // For OKLCH, use percentage syntax for lightness (e.g., 98.559%)
+      const l = mode === spaceName.oklch ? `${color.l.toFixed(3)}%` : color.l.toFixed(3)
       strings.push(
-        `--color-${hue}-${tone}: oklch(${l.toFixed(5)} ${color.c.toFixed(
+        `--color-${hue}-${tone}: oklch(${l} ${color.c.toFixed(
           3
         )} ${color.h.toFixed(3)});`
       )
